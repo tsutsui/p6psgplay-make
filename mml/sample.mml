@@ -1,0 +1,78 @@
+// PC-6001 PSG音源ドライバ MML サンプル
+// "meow bell" PSG バージョン 
+//  https://www.nicovideo.jp/watch/sm45628241
+// アレンジ元: https://youtu.be/XjxQew29tCc by 茶葉のぎか さん
+
+// このファイルのライセンスは上記アレンジ元の利用規約に従います
+// https://nogika-chaba.fanbox.cc/posts/6668165
+
+D        t10,3s-1,4,-1,0,0l16l+32j
+D        v13o5b16r16b16r16a16r32g32a16r32g32b16r32a32r16.g16.r32g32a32r16g32
+D        b16r16b16r16a16r32g32a16r32g32a+16r32a32r16.g16.r8.
+D        b16r16b16r16a16r32g32a16r32g32b16r32>d32r16.<g16.r32g32a32r16g32
+D        b16r32b16r16b32g16r32g32r16.g32d16r16a16r16g16r8.
+D        b16r16b16r16a16r32g32a16r32g32b16r32a32r16.g16.r32g32a32r16g32
+D        b16r16b16r16a16r32g32a16r32g32a+16r32a32r16.g16.r8.
+D        b16r16b16r16a16r32g32a16r32g32b16r32>d32r16.<g16r32g16a32r16g32
+D        b16r16a16r16g16r16a16r16g16r4.r16
+D        d16r8.d16r16d16r16a16g16r16d16r16<b16>c16c+16
+D        d16r16d16r16<a16r16a16r16g16a16r16b16r4
+D        >d16r8.d16r16d16r16a16g16r16d16r16<b16>c16c+16
+D        d16r16d16r16a16r16g16a16b16r32a16r16g16.r8.
+D        d16r8.d16r16d16r16a16g16r16d16r16<b16>c16c+16
+D        d16r16d16r16<a16r16a16r16g16.r32a16r32b16r8.r32
+D        >d16r8.d16r16d16r16a16g16r16d16r16<b16>c16c+16
+D        d16r16d16r16a16.r32g32r32a16b16r16a16r16g8r8
+D        d16r8.d16r16d16r16a16g16r16d16r16<b16>c16c+16
+D        d16r16d16r16<a16r16a16r16g16.r32a32r16b16.r8.
+D        >d16r8.d16r16d16r16a16g16r16d16r16<b16>c16c+16
+D        d16r16d16r16a16.r32g32r32a16b16r32a16r16.g16.r8r32
+D        d16r8.d16r16d16r16a16g16r16d16r16<b16>c16c+16
+D        d16r16d16r16<a16r16a16r16g16.r32a16r32b16r8.r32
+D        >d16r8.d16r16d16r16a16g16r16d16r16<b16>c16c+16
+D        d16r16d16r16a16.r32g32r32a16b16.r32a16.r32g8r8
+D        b16r16b16r16a16r32g32a16r32g32b16r32a16r16g16r32g16a32r32g16
+D        b16r16b16r16a16r32g32a16r32g32a+16r32a32r16.g16.r8.
+D        b16r16b16r16a16r32g32a16r32g32b16r32>d32r16.<g16.r32g32a32r16g32
+D        b16r32b16r16b32g16r32g16r16g32d16r16a16r16g16r8.
+D        b16r16b16r16a16r32g32a16r32g32b16r32a32r16.g16r32g16a32r32g16
+D        b16r16b16r16a16r32g32a16r32g32a+16r32a32r16.g16.r8.
+D        b16r16b16r16a16r32g32a16r32g32b16r32>d16r16<g16.r32g32a32r16g32
+D        b16r16a16r16g16r16a16r16g16r16r4.
+
+E        t10,3s-2,4,-1,0,0l8l+16j
+E        v13o3c8c8>c8<c16.c+32d8>d16<d8&d32d32c8
+E        <b8b8>d8d+16.e32e8>e16<e8e16>e8
+E        <c8c8>c8<c16.c+32d8>d16<d8d16c8
+E        <b8b8>d8d+8e8<b8>e8r8
+E        c8c8>c8<c16.c+32d8>d16<d8d16c8
+E        <b8b8>d8d+16.e32e8>e16<e8e16>e8
+E        <c8c8>c8<c16.c+32d8>d16<d8d16c8
+E        <b8b8>d8d+8e8e16.e32d8<g8>
+E        c8c8>c8<c16.c+32d8>d16<d8d16c8
+E        <b8b8>d8d+16.e32e8>e16<e8e16>e8
+E        <c8c8>c8<c16.c+32d8>d16<d8d16c8
+E        <b8b8>d8d+8e8e16.e32d8<g8>
+E        c8c8>c8<c16.c+32d8>d16<d8d16c8
+E        <b8b8>d8d+16.e32e8>e16<e8e16>e8
+E        <c8c8>c8<c16.c+32d8>d16<d8d16c8
+E        <b8b8>d8d+8e8e16.e32d8<g8>
+E        c8r8>c8<c16.c+32d8>d16<d8d16c8
+E        <b8b8>d8d+16.e32e8>e16<e8e16>e8
+E        <c8c8>c8<c16.c+32d8>d16<d8d16c8
+E        <b8b8>d8d+8e8e16.e32d8<g8>
+E        c8c8>c8<c16.c+32d8>d16<d8d16c8
+E        <b8b8>d8d+16.e32e8>e16<e8e16>e8
+E        <c8c8>c8<c16.c+32d8>d16<d8d16c8
+E        <b8b8>d8d+8e8e16.e32d8<g8>
+E        c8c8>c8<c16.c+32d8>d16<d8d16c8
+E        <b8b8>d8d+16.e32e8>e16<e8e16>e8
+E        <c8c8>c8<c16.c+32d8>d16<d8d16c8
+E        <b8b8>d8d+8e8e16.e32d8<g8>
+E        c8c8>c8<c16.c+32d8>d16<d8d16c8
+E        <b8b8>d8d+16.e32e8>e16<e8e16>e8
+E        <c8c8>c8<c16.c+32d8>d16<d8d16c8
+E        <b8b8>d8d+8e8e16.e32d8<g8>
+
+F        t10,3s-10,1,-1,0,0l16l+8j
+F        v15w31[o1b16r8.p3o2d8p1r8o1b16r8.p3o2d8p1r8]32
