@@ -1,0 +1,128 @@
+PC-6001 PSG音源ドライバパッチ
+
+(1) asl での include を前提にドライバ開始アドレス (ワークエリア含む) を可変に
+(2) asl でのアセンブルのためワークエリアも明示的に確保して初期化
+(3) PSG演奏データ OBJSAD は include 元で定義するのでコメントアウト
+(4) 演奏バイナリ先頭のデータアドレス値を先頭からのオフセットとして解釈する
+(5) ビブラートコマンドをタイでもリセットさせず Mコマンド時にパラメータ設定
+ 
+--- psgdrv_asmsrc.TXT.orig	2025-12-12 00:05:41.697969112 +0900
++++ psgdrv_asmsrc.TXT	2025-12-12 00:07:06.856829488 +0900
+@@ -1,16 +1,37 @@
+ ;
+ ;       MUSIC DRIVER FOR PC-6001
+ ;
+-        ORG     0F100H,0C000H
++DRVTOP: EQU     $
++
++MAINWK:
++        DB      7               ; 0: play flag
++        DB      0               ; 1: ---
++        DB      10              ; 2: Tempo value
++        DB      1               ; 3: Tempo counter
++        DB      0               ; 4: current channel
++        DB      0               ; 5: fade volume
++        DB      0               ; 6: fade out count value
++        DB      0               ; 7: fade out counter
++        DB      0               ; 8: PSG register 6
++        DB      56              ; 9: PSG register 7
++        DB      0               ; A: ---
++        DB      0               ; B: ---
++        DB      0               ; C: compile error flag
++        DB      0               ; D: I command value
++        DB      0               ; E: fade out arg
++        DB      0               ; F: fade arg
++
++
++        ORG     DRVTOP+0100h
+ 
+         JP      START           ;EXEC &HF100
+         JP      STOP            ;EXEC &HF103
+         JP      FADES           ;POKE &HF00F,n:EXEC &HF106
+         JP      FOUT            ;POKE &HF00E,n:EXEC &HF109
+ 
+-MAINWK: EQU     0F000H
++;MAINWK: EQU     0D000H
+ PSGWK:  EQU     MAINWK+10H
+-OBJSAD: EQU     0C000H
++;OBJSAD: EQU     0C000H
+ FMP0:   EQU     0A0H
+ FMP1:   EQU     0A1H
+ FMP2:   EQU     0A2H
+@@ -60,12 +81,17 @@
+         RET
+ 
+ PSGIT:
+-
+-
+-
+-
+-        LDI
+-        LDI
++        LD      BC,OBJSAD
++        LD      A,(HL)
++        ADD     A,C
++        LD      (DE),A
++        INC     HL
++        INC     DE
++        LD      A,(HL)
++        ADC     A,B
++        LD      (DE),A
++        INC     HL
++        INC     DE
+         PUSH    HL
+         LD      HL,PWD
+         LD      BC,7
+@@ -484,6 +510,8 @@
+ ALZ71:                          ;����װ� ����
+         BIT     6,(IY+10)
+         JR      Z,ALZ8
++        BIT     3,(IY+10)
++        JR      NZ,ALZ8         ;�� ���� �߽
+ 
+         PUSH    IY              ;����װ� ����
+         POP     HL
+@@ -767,7 +795,26 @@
+         OR      A
+         JP      NZ,CMDF51
+         RES     6,(IY+10)       ;����װ� OFF
++        JP      CMDJP
+ CMDF51:
++        XOR     A		;����װ� ����
++        LD      (IY+20),A
++        LD      (IY+21),A
++        LD      A,(IY+22)
++        LD      (IY+23),A
++        LD      A,(IY+24)
++        LD      (IY+25),A
++        LD      A,(IY+26)
++        RRCA
++        LD      (IY+27),A
++        LD      A,(IY+28)
++        AND     10000000B
++        JR      Z,CMDF52
++        RES     5,(IY+10)       ;- � ķ bit5=0
++        JR      CMDF53
++CMDF52:
++        SET     5,(IY+10)       ;+ � ķ bit5=1
++CMDF53:
+         JP      CMDJP
+ 
+ CMDF6:                          ;����װ� �׸�
+@@ -1039,9 +1086,10 @@
+         LD      (MAINWK),A
+         CALL    SOUND
+         RET
++DRVEND: EQU     $
+ 
+-        ORG     0F090H,0C800H
+ 
++        ORG     DRVTOP+0090h
+ 
+ 
+ FADES:
+@@ -1123,3 +1171,4 @@
+         EI
+         RET
+ 
++        ORG     DRVEND

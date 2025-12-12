@@ -1,0 +1,13 @@
+p6psgmmlc/
+p6towav/
+tape/
+txt2bas07/
+*.lst
+*.p
+*.bin
+*.orig
+*.zip
+psgdata.asm
+psgdrv/psgdrv_asmsrc.TXT
+psgdrv.asm
+psgplay.bas
