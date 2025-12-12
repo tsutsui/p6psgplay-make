@@ -1,3 +1,4 @@
+download/
 p6psgmmlc/
 p6towav/
 tape/
@@ -6,7 +7,6 @@ txt2bas07/
 *.p
 *.bin
 *.orig
-*.zip
 psgdata.asm
 psgdrv/psgdrv_asmsrc.TXT
 psgdrv.asm

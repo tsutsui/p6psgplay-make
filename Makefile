@@ -122,8 +122,9 @@ CHECK_TOOLS_asl=	${ASL} ${P2BIN} ${PLIST}
 ## txt2bas: BASICテキストファイルから P6ファイル生成
 ## http://retropc.net/isio/mysoft/#txt2bas
 ## ---------------------------------------------------------------------
+DOWNLOADDIR=	${TOP}/download
 TXT2BASZIP=	txt2bas07.zip
-TXT2BASURL=	http://retropc.net/isio/mysoft/${TXT2BASZIP}
+TXT2BASURL=	http://retropc.net/isio/mysoft/
 TXT2BASDIR=	${TOP}/txt2bas07
 TXT2BAS=	${TXT2BASDIR}/source/txt2bas
 
@@ -296,8 +297,9 @@ ${TXT2BAS}:
 	    ${CHECK_TOOLS_SH}
 	# 乱暴に取得展開
 	${RM} -rf ${TXT2BASDIR}
-	${WGET} ${TXT2BASURL}
-	${UNZIP} -o -x ${TXT2BASZIP}
+	${MKDIR} -p ${DOWNLOADDIR}
+	(cd ${DOWNLOADDIR} && ${WGET} ${TXT2BASURL}/${TXT2BASZIP})
+	${UNZIP} -o -x ${DOWNLOADDIR}/${TXT2BASZIP}
 	# ビルド
 	(cd ${TXT2BASDIR}/source && ${MAKE})
 
@@ -404,7 +406,7 @@ clean:
 	${RM} -rf ${CLEANDIR}
 
 distclean: clean
-	${RM} -f ${TXT2BASZIP} ${TXT2BASZIP}.*
+	${RM} -rf ${DOWNLOADDIR}
 	${RM} -rf ${TXT2BASDIR}
 	${RM} -rf ${P6PSGMMLCDIR}
 	${RM} -rf ${P6TOWAVDIR}
