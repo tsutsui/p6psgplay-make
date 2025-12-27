@@ -273,6 +273,8 @@ ${P6PSGMMLC}:
 	# ビルド
 	(cd ${P6PSGMMLCDIR} && ${MAKE})
 
+DISTCLEANDIR+=	${P6PSGMMLCDIR}
+
 # ----------------------------------------------------------------------
 # p6towav を git clone で取得してビルド
 # ----------------------------------------------------------------------
@@ -286,6 +288,8 @@ ${P6TOWAV}:
 	# ビルド
 	${GIT} clone ${P6TOWAVGITHUB}
 	(cd ${P6TOWAVDIR} && ${MAKE})
+
+DISTCLEANDIR+=	${P6TOWAVDIR}
 
 # ----------------------------------------------------------------------
 # txt2bas の zip アーカイブを取得してビルド
@@ -302,6 +306,9 @@ ${TXT2BAS}:
 	${UNZIP} -o ${DOWNLOADDIR}/${TXT2BASZIP}
 	# ビルド
 	(cd ${TXT2BASDIR}/source && ${MAKE})
+
+DISTCLEANDIR+=	${DOWNLOADDIR}
+DISTCLEANDIR+=	${TXT2BASDIR}
 
 # ----------------------------------------------------------------------
 # PSG driver: オリジナルのPSGドライバソースにパッチを当てる
@@ -406,7 +413,4 @@ clean:
 	${RM} -rf ${CLEANDIR}
 
 distclean: clean
-	${RM} -rf ${DOWNLOADDIR}
-	${RM} -rf ${TXT2BASDIR}
-	${RM} -rf ${P6PSGMMLCDIR}
-	${RM} -rf ${P6TOWAVDIR}
+	${RM} -rf ${DISTCLEANDIR}
